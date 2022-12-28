@@ -75,6 +75,8 @@ export default function Patient() {
             </MDBCardBody>
           </MDBCard>
         </div>
+
+        
         <div className="timeline-5 right-5">
           <MDBCard>
             <MDBCardBody className="p-4">
