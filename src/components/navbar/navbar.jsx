@@ -2,7 +2,7 @@ import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-function ColorSchemesExample() {
+function Header() {
   return (
     <>
    
@@ -10,17 +10,18 @@ function ColorSchemesExample() {
       <header>
     <div  className='name' position>
  
-           Mr.R. Ranjithkumar Rajaperumal, 22/M
+        <nav class = "text-primary font-weight-bold">  Mr.AABITHA D 29/M </nav> 
 
     </div>
+
     </header>
         <div className='topnav'>
           <Nav className="me-auto">
-            <Nav.Link href="#Profile">Profile</Nav.Link>
-            <Nav.Link href="#Patient Summary">Patient Summary</Nav.Link>
-            <Nav.Link href="#This Visit">This Visit</Nav.Link>
-            <Nav.Link href="#Precription">Prescription</Nav.Link>
-            <Nav.Link href="#Printing Precription">Printing Precription</Nav.Link>
+            <Nav.Link href="/profile">Profile</Nav.Link>
+            <Nav.Link href="/patient">Patient Summary</Nav.Link>
+            <Nav.Link href="visit">This Visit</Nav.Link>
+            <Nav.Link href="/prescription">Prescription</Nav.Link>
+            <Nav.Link href="/printing">Printing Precription</Nav.Link>
           </Nav>
           </div>
         
@@ -30,4 +31,4 @@ function ColorSchemesExample() {
   );
 }
 
-export default ColorSchemesExample;
+export default Header;
