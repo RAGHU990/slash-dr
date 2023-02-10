@@ -12,7 +12,7 @@ function Home() {
     <BrowserRouter>
       <Routes >
         <Route path='/profile' index element={<Profile />}  />
-        <Route path='/patient' element={<Patient />}  />
+        <Route path='/patient' element={<Patient key="ps" />}  />
         <Route path='/visit' element={<Visit />} />
         <Route path='/prescription' element={<Prescription />} />
         <Route path='/printing' element={<Printing />} />

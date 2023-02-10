@@ -1,106 +1,79 @@
-/*import React from "react";
-import Card from 'react-bootstrap/Card';
+/*import {useEffect, useState} from "react";
 
 function Patient() {
-    return (
-      <div className="App">
-      
-     
-       
-      </div>
-    );
-  }
-  
-  export default Patient; */
 
-  
-import React from "react";
-import { MDBCard, MDBCardBody, MDBContainer, MDBIcon } from "mdb-react-ui-kit";
+useEffect(() => {
+  const url = "https://jsonblob.com/1055903745329872896";
+  fetch(url)
+    .then(res => {
+      if (!res.ok) {
+        return Error("Problem in fetching photo url");
+      }
+      return res.blob();
+    })
+		}, []);
 
-export default function Patient() {
-  return (
-    
-    <MDBContainer fluid className="py-5 gradient-custom-5">
-      <div className="main-timeline-5">
-        <div className="timeline-5 right-5">
-          <MDBCard>
-            <MDBCardBody className="p-4">
-              <h5>Title of section 1</h5>
-              <span className="small text-muted">
-                <MDBIcon fas icon="clock" className="me-1" />
-                21 March, 2020
-              </span>
-              <p className="mt-2 mb-0">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                scelerisque diam non nisi semper, et elementum lorem ornare.
-                Maecenas placerat facilisis mollis. Duis sagittis ligula in
-                sodales vehicula....
-              </p>
-            </MDBCardBody>
-          </MDBCard>
-        </div>
-        <div className="timeline-5 right-5">
-          <MDBCard>
-            <MDBCardBody className="p-4">
-              <h5>Title of section 2</h5>
-              <span className="small text-muted">
-                <MDBIcon fas icon="clock" className="me-1" />5 April, 2020
-              </span>
-              <p className="mt-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                scelerisque diam non nisi semper.
-              </p>
-              <p className="mb-0">
-                Libero expedita explicabo eius fugiat quia aspernatur autem
-                laudantium error architecto recusandae natus sapiente sit nam
-                eaque, consectetur porro molestiae ipsam! Deleniti.
-              </p>
-            </MDBCardBody>
-          </MDBCard>
-        </div>
-        <div className="timeline-5 right-5">
-          <MDBCard>
-            <MDBCardBody className="p-4">
-              <h5>Title of section 3</h5>
-              <span className="small text-muted">
-                <MDBIcon fas icon="clock" className="me-1" />
-                18 August, 2020
-              </span>
-              <p className="mt-2 mb-0">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                scelerisque diam non nisi semper, et elementum lorem ornare.
-                Maecenas placerat facilisis mollis. Duis sagittis ligula in
-                sodales vehicula....
-              </p>
-            </MDBCardBody>
-          </MDBCard>
-        </div>
+return(
+<div>
+  <h1>hello</h1>
+</div>
 
-        
-        <div className="timeline-5 right-5">
-          <MDBCard>
-            <MDBCardBody className="p-4">
-              <h5>Title of section 4</h5>
-              <span className="small text-muted">
-                <MDBIcon fas icon="clock" className="me-1" />
-                10 October, 2020
-              </span>
-              <p className="mt-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                scelerisque diam non nisi semper, et elementum lorem ornare.
-                Maecenas placerat facilisis mollis. Duis sagittis ligula in
-                sodales vehicula....
-              </p>
-              <p className="mb-0">
-                Voluptatibus temporibus esse illum eum aspernatur, fugiat
-                suscipit natus! Eum corporis illum nihil officiis tempore.
-                Excepturi illo natus libero sit doloremque, laborum molestias
-                rerum pariatur quam ipsam necessitatibus incidunt, explicabo.
-              </p>
-            </MDBCardBody>
-          </MDBCard>
-        </div>
-      </div>
-    </MDBContainer>
-  );
+)
 }
+export default Patient; */
+import React, { useState, useEffect } from 'react';
+import { json } from 'react-router-dom';
+
+const Patient = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // fetch('https://jsonblob.com/api/jsonBlob/1055903745329872896')
+    //   .then(response => response.json())
+    //   .then(items => setData(items))
+    //   .catch(error => console.error(error))
+
+      async function fetchAppointments() {
+        const response = await fetch('https://jsonblob.com/api/jsonBlob/1055903745329872896');
+        const fetchAppointments = await response.json();
+        setData(fetchAppointments);
+        console.log('read data: ',fetchAppointments)
+      }
+      fetchAppointments();
+
+  },[]);
+
+  return (
+    <div>
+      { data.result && data.result.length > 0 ?  data.result.map(items => (
+        <div   class="card-body"key={items.appointment_id}>
+          <p class="card-text">Date: {items.date}</p>
+          <p class="card-text">Doctor: {items.doctor}</p>
+          <p class="card-text">Appointment ID: {items.appointment_id}</p>
+          {items.summary.map(note => (
+            <div key={note.id}>
+              <p class="card-title">{note.title}: {note.content}</p>
+            </div>
+          ))}
+          
+          
+       
+        </div>
+        
+      )) : 'no data fetched'}
+      <div class="card">
+  
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    
+  </div>
+</div>
+    </div>
+    
+
+  );
+};
+
+export default Patient;
+
